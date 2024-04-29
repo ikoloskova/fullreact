@@ -1,21 +1,19 @@
-const express = require('express');
-const PORT = process.env.PORT||3010;
-const app = express();
+var express = require('express')
+var app = express()
+var cors = require('cors')
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-});
+app.use(cors())
 
-app.listen(PORT, () => {
-    console.log('Server listening on ${PORT}');
-});
+//app.get('/',(req, res) => {
+    //res.setHeader('Access-Control-Allow-Origin', '*');
+    //next();
 
-const todoItems = require('./todo-items.json');
-app.get('/api/todo-items', (req, res) => {
-    res.json({ data: todoItems });
-});
 
-app.listen(PORT, () => {
-    console.log('Server listening on ${PORT}');
-});
+//const todoItems = require('./todo-items.json');
+app.get('/todo-items', function (req, res, next) {
+    res.json({ data: todoItems })
+})
+
+app.listen(80, function () {
+    console.log('Server listening on port 80')
+})
